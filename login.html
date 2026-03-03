@@ -1,0 +1,76 @@
+﻿<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+    <title>Login - Barra Scanner</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#0b0d10" />
+    <script>
+        try {
+            const settings = JSON.parse(localStorage.getItem("barra_settings") || "{}");
+            if (settings.theme) document.documentElement.setAttribute("data-theme", settings.theme);
+        } catch (_) { }
+    </script>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="auth-body">
+    <div class="aurora"></div>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+
+    <div id="app-loader" class="splash-loader">
+        <div class="loader-inner">
+            <div class="spinner"></div>
+            <div class="loader-copy">Comprobando sesión</div>
+        </div>
+    </div>
+    <div class="auth-grid">
+      <div class="login-container" style="display: none;">
+          <div class="login-card">
+              <div class="login-header">
+                  <div class="logo" aria-hidden="true">&#128225;</div>
+                  <div class="title">Barra Scanner</div>
+                  <div class="subtitle">Accede y sincroniza tus escaneos al instante.</div>
+              </div>
+              <div class="status-chip" id="connection-chip"><span class="status-dot"></span><span>Comprobando conexión...</span></div>
+  
+              <div class="segmented-control" aria-label="Selecciona método de acceso">
+                  <button id="tab-google" class="active">Google</button>
+                  <button id="tab-pin">User & PIN</button>
+              </div>
+  
+              <div id="form-google" class="auth-panel">
+                  <button id="btn-google" class="btn-primary">
+                      <span>G</span>
+                      <span>Continuar con Google</span>
+                  </button>
+                  <p class="microcopy">Recomendado para personal interno con cuenta corporativa.</p>
+              </div>
+  
+              <div id="form-pin" class="auth-panel" style="display: none;">
+                  <div class="form-group">
+                      <input id="pin-user" class="input" placeholder="Usuario" autocomplete="username" />
+                  </div>
+                  <div class="form-group">
+                      <div class="input-group">
+                          <input id="pin-code" type="password" class="input" placeholder="PIN de 6 dígitos" maxlength="6"
+                              inputmode="numeric" pattern="\d*" autocomplete="current-password" />
+                          <button id="toggle-pin-vis" class="toggle-vis" aria-label="Mostrar u ocultar PIN">&#128065;</button>
+                      </div>
+                  </div>
+                  <button id="btn-pin-login" class="btn-primary">Ingresar / Crear</button>
+                  <div class="form-helper-text">Validamos que el PIN tenga 6 dígitos. Si el usuario no existe, lo creamos automáticamente.</div>
+              </div>
+              <div id="login-status" class="login-status"></div>
+          </div>
+      </div>
+    </div>
+    <script type="module" src="login.js"></script>
+</body>
+
+</html>
